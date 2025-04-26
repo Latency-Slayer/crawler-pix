@@ -14,7 +14,7 @@ import boto3
 
 def lambda_handler(event, context):
 
-    url = "https://olinda.bcb.gov.br/olinda/servico/Pix_DadosAbertos/versao/v1/odata/EstatisticasTransacoesPix(Database=@Database)?@Database='202310'&$top=500&$format=json&$select=AnoMes,PAG_PFPJ,REC_PFPJ,PAG_REGIAO,REC_REGIAO,PAG_IDADE,REC_IDADE,FORMAINICIACAO,NATUREZA,FINALIDADE,VALOR,QUANTIDADE"
+    url = "https://olinda.bcb.gov.br/olinda/servico/Pix_DadosAbertos/versao/v1/odata/EstatisticasTransacoesPix(Database=@Database)?@Database='202011'&$top=50&$format=json&$select=AnoMes,PAG_PFPJ,REC_PFPJ,PAG_REGIAO,REC_REGIAO,PAG_IDADE,REC_IDADE,FINALIDADE,VALOR,QUANTIDADE"
 
     try:
 
@@ -41,9 +41,7 @@ def lambda_handler(event, context):
         s3.upload_file(
 
             Filename=nome_arquivo,
-
-            Bucket='my-python-bucket-01',
-
+            Bucket='s3-etl-pix',
             Key='pix/dados.json'
         )
 
